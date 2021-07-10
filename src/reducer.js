@@ -2,6 +2,7 @@ const localData = localStorage.getItem("basket");
 export const initialState = {
   basket: localData ? JSON.parse(localData) : [],
   user: [],
+  searchedValue: ''
 };
 export const getBasketTotal = (basket) =>
   basket?.reduce((amount, item) => item.price + amount, 0);
@@ -41,7 +42,11 @@ const reducer = (state, action) => {
         ...state,
         basket: [],
       };
-
+      case "ADD_TO_SEARCH_FIELD":
+        return {
+          ...state,
+          searchedValue: action.item,
+        };    
     default:
       return state;
   }

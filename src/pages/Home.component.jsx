@@ -1,30 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { API } from "../backend";
+import { useStateValue } from "../stateprovider";
 import { getProducts } from "../coreapicalls";
 import Product from "../components/Product.component";
 import "./Home.styles.scss";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [{ basket, user, searchedValue }] = useStateValue();
   //   const [searchedProducts, setsProducts] = useState([]);
   //   const [searchField, setSearchField] = useState([""]);
 
   const [error, setError] = useState(false);
   const loadAllProduct = () => {
-    getProducts().then((data) => {
-      if (data.error) {
-        setError(data.error);
+    getProducts().then((data,err) => {
+      if (err) {
+        setError(error);
       } else {
         console.log(data);
         setProducts(data);
+        console.log(products);
+      }
+    });
+  };
+  const loadSearchedProduct = () => {
+    console.log(searchedValue);
+    getProducts().then((data,err) => {
+      if (err) {
+        setError(error);
+      } else {
+        const filteredProducts=data.filter(data=>data['name'].toLowerCase().includes(searchedValue));
+        console.log(filteredProducts);
+        setProducts(filteredProducts);
+        // console.log(products);
       }
     });
   };
   useEffect(() => {
     loadAllProduct();
   }, []);
-  console.log("API IS", API);
 
+  useEffect(() =>{
+    if(searchedValue!=null)
+    loadSearchedProduct();
+    if(searchedValue.length==1){
+      loadAllProduct();
+    }
+  },[searchedValue]);
+  console.log("API IS", API);
+  console.log(searchedValue? searchedValue:'');
   return (
     <div className='home'>
       <img
@@ -34,17 +58,19 @@ export default function Home() {
       />
 
       <div className='home__container'>
-        {/* <div className='home__row'>
+        <div className='home__row'>
           {products
             .filter((product) => product.category.name === "Samsung")
             .map((product, index) => {
               return (
                 <Product
-                  id='1'
+                  id={product._id}
                   title={product.name}
                   price={product.price}
                   rating={4}
                   image={product.imgUrl}
+                  description={product.description}
+                  stock={product.stock}
                 />
               );
             })}
@@ -55,11 +81,13 @@ export default function Home() {
             .map((product, index) => {
               return (
                 <Product
-                  id='1'
-                  title={product.name}
-                  price={product.price}
-                  rating={4}
-                  image={product.imgUrl}
+                id={product._id}
+                title={product.name}
+                price={product.price}
+                rating={4}
+                image={product.imgUrl}
+                description={product.description}
+                stock={product.stock}
                 />
               );
             })}
@@ -70,11 +98,13 @@ export default function Home() {
             .map((product, index) => {
               return (
                 <Product
-                  id='1'
-                  title={product.name}
-                  price={product.price}
-                  rating={4}
-                  image={product.imgUrl}
+                id={product._id}
+                title={product.name}
+                price={product.price}
+                rating={4}
+                image={product.imgUrl}
+                description={product.description}
+                stock={product.stock}
                 />
               );
             })}
@@ -83,16 +113,18 @@ export default function Home() {
             .map((product, index) => {
               return (
                 <Product
-                  id='1'
-                  title={product.name}
-                  price={product.price}
-                  rating={4}
-                  image={product.imgUrl}
+                id={product._id}
+                title={product.name}
+                price={product.price}
+                rating={4}
+                image={product.imgUrl}
+                description={product.description}
+                stock={product.stock}
                 />
               );
             })}
-        </div> */}
-        <Product
+        </div>
+        {/* <Product
           id='1'
           key={"1"}
           title='The Subtle Art of Not Giving a F*ck Paperback'
@@ -162,7 +194,7 @@ export default function Home() {
           price={4399}
           rating={4}
           image='https://images-na.ssl-images-amazon.com/images/I/91FKnvV4PHL._SL1500_.jpg'
-        />
+        /> */}
       </div>
     </div>
   );

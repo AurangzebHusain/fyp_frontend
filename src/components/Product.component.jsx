@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useStateValue } from "../stateprovider";
 import "./Product.styles.scss";
-export default function Product({ id, title, price, rating, image }) {
+import ProductModal from './productModal/ProductModal.component';
+export default function Product({ id, title, price, rating, image,description,stock }) {
+ 
   const [{ basket }, dispatch] = useStateValue();
   // console.log('Basket item is',basket)
 
@@ -37,6 +39,13 @@ export default function Product({ id, title, price, rating, image }) {
           ))}
       </div>
       <img className='product__image' src={image} alt='product-img' />
+      <ProductModal id={id}
+                  title={title}
+                  price={price}
+                  rating={4}
+                  image={image}
+                  description={description}
+                  stock={stock}/>
       <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
