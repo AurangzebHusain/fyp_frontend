@@ -30,10 +30,16 @@ export default function Header() {
         <SearchIcon className='header__search--Icon' />
       </div>
       <div className='header__nav'>
+        <Link to={"/vendorRegister"}>
+          <div className='header__option'>
+            <span className='header__option--LineOne'>Want to Sell?</span>
+            <span className='header__option--LineTwo'>{"Sign In"}</span>
+          </div>
+        </Link>
         <Link to={!user ? "/signin" : ""}>
           <div onClick={handleAuthentication} className='header__option'>
             <span className='header__option--LineOne'>
-              Hello,{user ? user.email : "guest"}{" "}
+              Hello,{user ? user.email : "guest"}
             </span>
             <span className='header__option--LineTwo'>
               {user ? "Sign Out" : "Sign In"}
