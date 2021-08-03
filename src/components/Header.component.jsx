@@ -11,7 +11,7 @@ export default function Header() {
   const [{ basket, user }] = useStateValue();
   const [{ searchFieldVal }, dispatch] = useStateValue();
 
-    const [searchedProducts, setsProducts] = useState([]);
+    const [searchedCategory, setCategory] = useState([]);
     const [searchField, setSearchField] = useState(['']);
   // const email = user && user.email ? user.email : 'guest';
 
@@ -25,6 +25,15 @@ export default function Header() {
       item:searchField,
     });
   };
+  const addSearchedCategory = (value) => {
+    setCategory(value);
+    console.log(value);
+    //dispatch the items into data layer
+    dispatch({
+      type: "ADD_TO_SEARCH_FIELD",
+      item:searchedCategory,
+    });
+  };
   const handleAuthentication = () => {
     if (user) {
       auth.signOut();
@@ -36,6 +45,7 @@ export default function Header() {
     addSearchedProduct()
   }
   return (
+    <React.Fragment>
     <div className='header'>
       <Link className='navbar-brand' to={"/"}>
         <img width='150px' height='50px' src={logo} alt={"brand-logo"} />
@@ -77,5 +87,14 @@ export default function Header() {
         </Link>
       </div>
     </div>
+    <div className="category-bar">
+    <a href="#" className="item item-1" onClick={()=>{addSearchedCategory('') }}>All</a>
+    <a href="#" className="item item-2" onClick={()=>{addSearchedCategory('smartphone') }}>SmartPhones</a>
+    <a href="#" className="item item-3" onClick={()=>{addSearchedCategory('men') }}>Clothes</a>
+    <a href="#" className="item item-4" onClick={()=>{addSearchedCategory('books') }}>Books</a>
+    <a href="#" className="item item-5" onClick={()=>{addSearchedCategory('pro') }}>apple</a>
+    <a href="#" className="item item-6" onClick={()=>{addSearchedCategory('samsung') }}>Samsung</a>
+  </div>
+  </React.Fragment>
   );
 }

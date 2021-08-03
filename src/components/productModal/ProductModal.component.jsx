@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal({ id, title, price, rating, image,stock,description }) {
 
-    console.log(id,title,description);
+    // console.log(id,title,description);
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -81,14 +81,18 @@ export default function SimpleModal({ id, title, price, rating, image,stock,desc
             </span>
           ))}
       </div>
+      
       <div className="productd__desc">
           <h2>Description</h2>
       <p>{description}</p> 
       </div>
-      <div className="productd__stock">
+      {
+          stock?<div className="productd__stock">
           <h4>Stock Avaialable :</h4>
       <p>{stock}</p> 
-      </div>
+      </div>: ''
+      }
+      
 
       <p className='productd__price'>
         <small>₹</small>

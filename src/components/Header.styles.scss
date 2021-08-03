@@ -83,3 +83,23 @@
     }
   }
 }
+
+.category-bar{
+  a{
+    text-decoration: none;
+    color: black;
+  }
+margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  .item{
+    font-size: 1.2rem;
+    padding:0.5rem;
+    transition: all 0.4s;
+  }
+  .item:hover{
+    transform: scale(1.1);
+  }
+}

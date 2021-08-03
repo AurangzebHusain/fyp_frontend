@@ -36,6 +36,16 @@ export default function Payment() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
+    setTimeout(() => {
+      setSucceeded(true);
+      setError(null);
+      setProcessing(false);
+      dispatch({
+        type: "EMPTY_BASKET",
+      });
+      history.replace("/orders");
+    
+    }, 5000);
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -52,6 +62,8 @@ export default function Payment() {
         });
         history.replace("/orders");
       });
+
+      
   };
   const handleChange = (event) => {
     console.log("button clicked");

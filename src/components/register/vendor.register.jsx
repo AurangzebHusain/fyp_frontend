@@ -124,6 +124,10 @@ function VendorDetails() {
               label={"Mobile Number"}
               value={vendorDetails.userMobile}
               type={"number"}
+              // InputProps={{
+              //   inputProps: {
+              //       max: 12, min: 10 
+              //   }}}
               onChange={(e) =>
                 setVendorDetails({
                   ...vendorDetails,
@@ -219,9 +223,9 @@ function VendorDetails() {
               required
               select
               placeholder={"Select Type of shop"}>
-              <MenuItem value={"someValue"}> {"Type1"} </MenuItem>
-              <MenuItem value={"someValue"}> {"Type1"} </MenuItem>
-              <MenuItem value={"someValue"}> {"Type1"} </MenuItem>
+              <MenuItem value={"someValue"}> {"Registered"} </MenuItem>
+              <MenuItem value={"someValue"}> {"Unregistered"} </MenuItem>
+              <MenuItem value={"someValue"}> {"MSME Registered"} </MenuItem>
             </TextField>
             <TextField
               rows={2}

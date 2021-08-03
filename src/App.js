@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 
 import "./App.css";
 import Header from "./components/Header.component";
+import Footer from './components/Footer.component';
 import Home from "./pages/Home.component";
 import { Switch, Route } from "react-router-dom";
 import Checkout from "./components/checkout/checkout.component";
@@ -65,6 +66,7 @@ function App() {
         <Route path='/'>
           <Header />
           <Home />
+          <Footer/>
         </Route>
         {/* <Route exact path='/' component={Home}/>
       <Route path='/signin' component={signIn}/> 

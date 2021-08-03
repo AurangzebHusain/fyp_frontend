@@ -16,8 +16,8 @@ export default function Home() {
     getProducts().then((data,err) => {
       if (err) {
         setError(error);
+        console.log(error);
       } else {
-        console.log(data);
         setProducts(data);
         console.log(products);
       }
@@ -43,11 +43,11 @@ export default function Home() {
   useEffect(() =>{
     if(searchedValue!=null)
     loadSearchedProduct();
-    if(searchedValue.length==1){
+    if(searchedValue.length===1){
       loadAllProduct();
     }
   },[searchedValue]);
-  console.log("API IS", API);
+  // console.log("API IS", API);
   console.log(searchedValue? searchedValue:'');
   return (
     <div className='home'>
@@ -58,7 +58,7 @@ export default function Home() {
       />
 
       <div className='home__container'>
-        <div className='home__row'>
+        {/* <div>
           {products
             .filter((product) => product.category.name === "Samsung")
             .map((product, index) => {
@@ -74,8 +74,9 @@ export default function Home() {
                 />
               );
             })}
-        </div>
-        <div className='home__row'>
+        </div> */}
+        
+        <React.Fragment>
           {products
             .filter((product) => product.category.name === "iPhone")
             .map((product, index) => {
@@ -91,23 +92,25 @@ export default function Home() {
                 />
               );
             })}
-        </div>
-        <div className='home__row'>
-          {products
-            .filter((product) => product.category.name === "E")
+        </React.Fragment>
+        <React.Fragment>
+        {products
+            .filter((product) => product.category.name === "Samsung")
             .map((product, index) => {
               return (
                 <Product
-                id={product._id}
-                title={product.name}
-                price={product.price}
-                rating={4}
-                image={product.imgUrl}
-                description={product.description}
-                stock={product.stock}
+                  id={product._id}
+                  title={product.name}
+                  price={product.price}
+                  rating={4}
+                  image={product.imgUrl}
+                  description={product.description}
+                  stock={product.stock}
                 />
               );
             })}
+            </React.Fragment>
+            <React.Fragment>
           {products
             .filter((product) => product.category.name === "Smartphones")
             .map((product, index) => {
@@ -123,8 +126,25 @@ export default function Home() {
                 />
               );
             })}
-        </div>
-        {/* <Product
+            </React.Fragment>
+        <React.Fragment>
+          {products
+            .filter((product) => product.category.name === "Clothes")
+            .map((product, index) => {
+              return (
+                <Product
+                id={product._id}
+                title={product.name}
+                price={product.price}
+                rating={4}
+                image={product.imgUrl}
+                description={product.description}
+                stock={product.stock}
+                />
+              );
+            })}
+        </React.Fragment>
+        <Product
           id='1'
           key={"1"}
           title='The Subtle Art of Not Giving a F*ck Paperback'
@@ -165,14 +185,6 @@ export default function Home() {
           image='https://images-na.ssl-images-amazon.com/images/I/71o1shNaKGL._SL1500_.jpg'
         />
         <Product
-          id='12'
-          key={"12"}
-          title='The Subtle Art of Not Giving a F*ck Paperback'
-          price={399}
-          rating={3}
-          image='https://images-na.ssl-images-amazon.com/images/I/511vJPN7p5L._SX331_BO1,204,203,200_.jpg'
-        />
-        <Product
           id='112'
           key={"112"}
           title='OnePlus 7T (Glacier Blue, 8GB RAM, Fluid AMOLED Display, 256GB Storage, 3800mAH Battery)'
@@ -194,7 +206,7 @@ export default function Home() {
           price={4399}
           rating={4}
           image='https://images-na.ssl-images-amazon.com/images/I/91FKnvV4PHL._SL1500_.jpg'
-        /> */}
+        />
       </div>
     </div>
   );

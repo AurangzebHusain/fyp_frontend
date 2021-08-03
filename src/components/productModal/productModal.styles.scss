@@ -1,5 +1,5 @@
-body{
-
+div{
+    text-align: center;
 }
 
 .product-description{
@@ -35,6 +35,7 @@ p{
 }
 }
 .productd__stock{
+    text-align: start;
     h4{
         text-align: start;
         display: inline-block;
@@ -47,6 +48,7 @@ p{
     }
     }
 .productd__price{
+    text-align: start;
     font-size: 3rem;
 font-weight: 800;
 }
